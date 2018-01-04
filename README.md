@@ -45,13 +45,14 @@
     
     ```php
        $baiduSpeech = new Jormin\BaiduSpeech\BaiduSpeech($appID, $apiKey, $secretKey);
-       $baiduSpeech->combine($text, $userID, $lan, $speed, $pitch, $volume, $person, $storageDir);
+       $baiduSpeech->combine($storagePath, $text, $userID, $lan, $speed, $pitch, $volume, $person);
     ```
          
     接口字段：
     
     | 参数  | 类型  | 说明  | 可为空  |
     | ------------ | ------------ | ------------ | ------------ |
+    | storagePath | String | 文件存储路径，需是绝对路径 | N |
     | text | String | 合成的文本 | N |
     | userID | String | 用户唯一标识 | Y |
     | lan | String | 语言，可选值 ['zh']，默认为zh | Y |
@@ -59,7 +60,6 @@
     | pitch | Integer | 音调，取值0-9，默认为5中语调 | Y |
     | volume | Integer | 音量，取值0-15，默认为5中音量 | Y |
     | person | Integer | 发音人选择, 0为女声，1为男声，3为情感合成-度逍遥，4为情感合成-度丫丫，默认为普通女 | Y |
-    | $storageDir | String | 文件存储路径名称，需是绝对路径 | Y |
 
 ## License
 

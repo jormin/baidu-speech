@@ -91,6 +91,7 @@ class BaiduSpeech{
     /**
      * 语音合成
      *
+     * @param $storagePath string 存储路径
      * @param $text string 合成的文本
      * @param $userID string 用户唯一标识
      * @param $lan string 语音 ['zh']
@@ -98,10 +99,9 @@ class BaiduSpeech{
      * @param $pitch integer 音调，取值0-9，默认为5中语调
      * @param $volume integer 音量，取值0-15，默认为5中音量
      * @param $person integer 发音人选择, 0为女声，1为男声，3为情感合成-度逍遥，4为情感合成-度丫丫，默认为普通女
-     * @param $storageDir string 存储文件路径名称
      * @return array
      */
-    public function combine($text, $userID=null, $lan='zh', $speed=5, $pitch=5, $volume=5, $person=0, $storageDir=null)
+    public function combine($storagePath, $text, $userID=null, $lan='zh', $speed=5, $pitch=5, $volume=5, $person=0)
     {
         $return = ['success'=>false, 'msg'=>'网络超时'];
         if(!$text){
@@ -137,7 +137,7 @@ class BaiduSpeech{
         }
         $response = $aipSpeech->synthesis($text, $lan, 1, $options);
         if(!is_array($response)){
-            $fileName = $storageDir.'/'.date('Ymd').'/'.uniqid().'.mp3';
+            $fileName = $storagePath.'/'.date('Ymd').'/'.uniqid().'.mp3';
             file_put_contents($fileName, $response);
             $return = [
                 'success' => true,
