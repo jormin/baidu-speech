@@ -104,6 +104,10 @@ class BaiduSpeech{
     public function combine($storagePath, $text, $userID=null, $lan='zh', $speed=5, $pitch=5, $volume=5, $person=0)
     {
         $return = ['success'=>false, 'msg'=>'网络超时'];
+        if(!$storagePath && !file_exists($storagePath)){
+            $return['msg'] = '存储路径错误';
+            return $return;
+        }
         if(!$text){
             $return['msg'] = '缺少合成的文本';
             return $return;
@@ -137,6 +141,9 @@ class BaiduSpeech{
         }
         $response = $aipSpeech->synthesis($text, $lan, 1, $options);
         if(!is_array($response)){
+            if(!file_exists($storagePath.'/'.date('Ymd'))){
+                mkdir($storagePath.'/'.date('Ymd'), 0777, true);
+            }
             $fileName = $storagePath.'/'.date('Ymd').'/'.uniqid().'.mp3';
             file_put_contents($fileName, $response);
             $return = [
