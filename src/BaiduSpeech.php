@@ -83,7 +83,11 @@ class BaiduSpeech{
                 'data' => $response['result']
             ];
         }else{
-            $return['msg'] = '语音识别错误,错误码:'.$response['error_code'].',错误信息:'.$response['error_msg'];
+            $return['msg'] = '语音识别错误,错误码:'.$response['error_no'].',错误信息:'.$response['error_msg'];
+            $return['data'] = [
+                'error_no' => $response['error_no'],
+                'error_msg' => $response['error_msg']
+            ];
         }
         return $return;
     }
@@ -152,7 +156,11 @@ class BaiduSpeech{
                 'data' => $fileName
             ];
         }else{
-            $return['msg'] = '语音合成错误,错误码:'.$response['error_code'].',错误信息:'.$response['error_msg'];
+            $return['msg'] = '语音合成错误,错误码:'.$response['error_no'].',错误信息:'.$response['error_msg'];
+            $return['data'] = [
+                'error_no' => $response['error_no'],
+                'error_msg' => $response['error_msg']
+            ];
         }
         return $return;
     }
