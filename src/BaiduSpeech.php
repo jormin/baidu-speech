@@ -151,7 +151,7 @@ class BaiduSpeech{
             }
             $fileName = $dir.'/'.uniqid().'.mp3';
             file_put_contents($fileName, $response);
-            mkdir($fileName, 0777);
+            chmod($fileName, 0777);
             $return = [
                 'success' => true,
                 'msg' => '语音合成成功',
