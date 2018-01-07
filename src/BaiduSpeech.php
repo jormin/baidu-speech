@@ -145,11 +145,13 @@ class BaiduSpeech{
         }
         $response = $aipSpeech->synthesis($text, $lan, 1, $options);
         if(!is_array($response)){
-            if(!file_exists($storagePath.'/'.date('Ymd'))){
-                mkdir($storagePath.'/'.date('Ymd'), 0777, true);
+            $dir = $storagePath.'/'.date('Y').'/'.date('m').'/'.date('d');
+            if(!file_exists($dir)){
+                mkdir($dir, 0777, true);
             }
-            $fileName = $storagePath.'/'.date('Ymd').'/'.uniqid().'.mp3';
+            $fileName = $dir.'/'.uniqid().'.mp3';
             file_put_contents($fileName, $response);
+            mkdir($fileName, 0777);
             $return = [
                 'success' => true,
                 'msg' => '语音合成成功',
